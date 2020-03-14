@@ -1,0 +1,268 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="placedsuccessfully.aspx.cs" Inherits="RamlyRestaurant.placedsuccessfully" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <style type="text/css">
+        .auto-style2 {
+            width: 100%;
+        }
+        .auto-style3 {
+            text-align: center;
+        }
+        .auto-style4 {
+            height: 57px;
+        }
+        .auto-style5 {
+            height: 57px;
+            width: 407px;
+        }
+        .auto-style6 {
+            height: 54px;
+        }
+        .auto-style7 {
+            margin-top: 0px;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:Label ID="Label1" runat="server" ForeColor="Red" Text="Generate invoice as PDF in Asp.Net C#"></asp:Label>
+            <br />
+            <br />
+            Order ID:
+            <asp:Label ID="Label2" runat="server"></asp:Label>
+            <br />
+            <br />
+            <asp:Button ID="Button1" runat="server" Height="50px" Text="Download Invoice" Width="156px" OnClick="Button1_Click" />
+            <br />
+            <br />
+            <asp:Panel ID="Panel1" runat="server" Height="622px" Width="829px">
+                <table class="auto-style2" border="1">
+                    <tr>
+                        <td class="auto-style3">Retail Invoice</td>
+                    </tr>
+                    <tr>
+                        <td>Order No:
+                            <asp:Label ID="Label3" runat="server"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Order Date:
+                            <asp:Label ID="Label4" runat="server"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <br />
+                            <table class="auto-style2">
+                                <tr>
+                                    <td class="auto-style5">Buyer Address:<br />
+                                        <asp:Label ID="Label5" runat="server"></asp:Label>
+                                    </td>
+                                    <td class="auto-style4">Seller Address:<br />
+                                        <asp:Label ID="Label6" runat="server"></asp:Label>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br />
+                            <asp:GridView ID="GridView1" runat="server" CssClass="auto-style7" Width="808px" AutoGenerateColumns="False">
+                                <Columns>
+                                    <asp:BoundField DataField="sno" HeaderText="S.No">
+                                    <ItemStyle HorizontalAlign="Center" />
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="prod_id" HeaderText="Product ID">
+                                    <ItemStyle HorizontalAlign="Center" />
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="prod_name" HeaderText="Product Name">
+                                    <ItemStyle HorizontalAlign="Center" />
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="quantity" HeaderText="Quantity">
+                                    <ItemStyle HorizontalAlign="Center" />
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="prod_price" HeaderText="Price">
+                                    <ItemStyle HorizontalAlign="Center" />
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="totalprice" HeaderText="Total Price">
+                                    <ItemStyle HorizontalAlign="Center" />
+                                    </asp:BoundField>
+                                </Columns>
+                            </asp:GridView>
+                            <br />
+                        </td>
+                    </tr>
+                    <caption>
+                        <br />
+                        <br />
+                        <tr>
+                            <td class="auto-style6">Grand Total:
+                                <asp:Label ID="Label7" runat="server"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Declaration: We declare that this invoice shows actual price of the goods describes inclusives of taxes and that all particulars are true and correct.
+                                <br />
+                                <br />
+                                THIS IS COMPUTER GENERATED INVOICED AND DOES NOT REQUIRED SIGNATURE</td>
+                        </tr>
+                    </caption>
+                </table>
+                
+            </asp:Panel>
+        </div>
+    </form>
+</body>
+</html>
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+using iTextSharp.text;
+using System.IO;
+using iTextSharp.text.html.simpleparser;
+using iTextSharp.text.pdf;
+
+namespace RamlyRestaurant
+{
+    public partial class placedsuccessfully : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            Label2.Text = Request.QueryString["orderid"];
+            Label4.Text = Label2.Text;
+            findorderdate(Label4.Text);
+            findaddress(Label5.Text);
+            showgrid(Label4.Text);
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            exportpdf();
+        }
+        private void exportpdf()
+        {
+            Response.ContentType = "application/pdf";
+            Response.AddHeader("content-disposition", "attachment;filename=OrderInvoice.pdf");
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter hw = new HtmlTextWriter(sw);
+            Panel1.RenderControl(hw);
+            StringReader sr = new StringReader(sw.ToString());
+            Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 100f, 0f);
+            HTMLWorker htmlparser = new HTMLWorker(pdfDoc);
+            PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
+            pdfDoc.Open();
+            htmlparser.Parse(sr);
+            pdfDoc.Close();
+            Response.Write(pdfDoc);
+            Response.End();
+        }
+        private void findorderdate(String Orderid)
+        {
+            String mycon = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\StoreDatabase.mdf;Integrated Security=True";
+            String myquery = "Select * from OrderDetails where orderid='" + Orderid + "'";
+            SqlConnection con = new SqlConnection(mycon);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = myquery;
+            cmd.Connection = con;
+            SqlDataAdapter da = new SqlDataAdapter();
+            da.SelectCommand = cmd;
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+
+                Label5.Text = ds.Tables[0].Rows[0]["dateoforder"].ToString();
+
+            }
+
+            con.Close();
+        }
+        private void findaddress(String Orderid)
+        {
+            String mycon = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\StoreDatabase.mdf;Integrated Security=True";
+            String myquery = "Select * from OrderAddress where orderid='" + Orderid + "'";
+            SqlConnection con = new SqlConnection(mycon);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = myquery;
+            cmd.Connection = con;
+            SqlDataAdapter da = new SqlDataAdapter();
+            da.SelectCommand = cmd;
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+
+                Label6.Text = ds.Tables[0].Rows[0]["address"].ToString();
+
+            }
+
+            con.Close();
+        }
+        private void showgrid(String orderid)
+        {
+            DataTable dt = new DataTable();
+            DataRow dr;
+
+            dt.Columns.Add("sno");
+            dt.Columns.Add("prod_id");
+            dt.Columns.Add("prod_name");
+            dt.Columns.Add("quantity");
+            dt.Columns.Add("prod_price");
+            dt.Columns.Add("totalprice");
+            String mycon = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\StoreDatabase.mdf;Integrated Security=True";
+            SqlConnection scon = new SqlConnection(mycon);
+            String myquery = "select * from OrderDetails where orderid='" + orderid + "'";
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = myquery;
+            cmd.Connection = scon;
+            SqlDataAdapter da = new SqlDataAdapter();
+            da.SelectCommand = cmd;
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            int totalrows = ds.Tables[0].Rows.Count;
+            int i = 0;
+            int grandtotal = 0;
+            while (i < totalrows)
+            {
+                dr = dt.NewRow();
+                dr["sno"] = ds.Tables[0].Rows[i]["sno"].ToString();
+                dr["prod_id"] = ds.Tables[0].Rows[i]["prod_id"].ToString();
+                dr["prod_name"] = ds.Tables[0].Rows[i]["prod_name"].ToString();
+                dr["quantity"] = ds.Tables[0].Rows[i]["quantity"].ToString();
+                dr["prod_price"] = ds.Tables[0].Rows[i]["prod_price"].ToString();
+                int price = Convert.ToInt16(ds.Tables[0].Rows[i]["prod_price"].ToString());
+                int quantity = Convert.ToInt16(ds.Tables[0].Rows[i]["quantity"].ToString());
+                int totalprice = price * quantity;
+                dr["totalprice"] = totalprice;
+                grandtotal = grandtotal + totalprice;
+                dt.Rows.Add(dr);
+                i = i + 1;
+            }
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+
+            Label7.Text = grandtotal.ToString();
+        }
+        public override void VerifyRenderingInServerForm(Control control)
+        {
+            /* Verifies that the control is rendered */
+        }
+
+    }
+}

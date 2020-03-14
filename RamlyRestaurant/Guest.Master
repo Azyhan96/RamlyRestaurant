@@ -1,0 +1,53 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Guest.master.cs" Inherits="RamlyRestaurant.Guest" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+ <form id="form1" runat="server">
+        <div>
+            <table style="width: 100%;">
+                <tr>
+                    <td rowspan="3" >
+                        <br />
+                    </td>
+                    <td align="center">
+                        <div>
+                           <img alt="" src="images/logo.png" /><asp:HyperLink ID="HyperLink1" runat="server" Width="57px" NavigateUrl="~/default.aspx">Home</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink2" runat="server" Width="66px" NavigateUrl="~/Menu.aspx">Menu</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink3" runat="server" Width="80px" NavigateUrl="~/Register.aspx">Register</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink4" runat="server" Width="57px" NavigateUrl="~/Login.aspx">Login</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink5" runat="server" Width="83px" NavigateUrl="~/Feedback.aspx">Feedback</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink6" runat="server" Width="93px" NavigateUrl="~/About.aspx">About Us</asp:HyperLink>
+                        </div>
+                        <br />
+                    </td>
+                    <td rowspan="3">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="auto-style2">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style2" align="center">
+                        <div align="center">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</body>
+</html>
+
+
+
+
+ 

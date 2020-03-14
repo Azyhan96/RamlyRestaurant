@@ -1,0 +1,52 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Admin.master.cs" Inherits="RamlyRestaurant.Admin" %>
+
+<%@ Register Src="WebUserControl/LoginStatus.ascx" TagName="LoginStatus" TagPrefix="uc1" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <table style="width: 100%;">
+                <tr>
+                    <td rowspan="3">
+                        <br />
+                    </td>
+                    <td align="center">
+                        <div>
+                            <img alt="" src="images/logo.png" />
+                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/AddProduct.aspx" Height="21px" Width="116px">Add Products</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/UpdateProduct.aspx" Height="39px" Width="121px">Update Products</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/DeleteProduct.aspx" Width="108px">Delete Products</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/SearchAccount.aspx" Width="153px">Search Accounts</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/ViewUser.aspx">View Accounts</asp:HyperLink> 
+                            <br />
+                            <br />
+                            <uc1:LoginStatus ID="LoginStatus1" runat="server" />
+                        </div>
+                        <br />
+                    </td>
+                    <td rowspan="3">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <div align="center">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</body>
+</html>
