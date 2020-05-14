@@ -21,24 +21,28 @@ _Coming Soon_
 
 4. next step , *edit apa yang patut di local folder tadi , yang dah di clone dari github . apa yang kita dah decide untuk change request .* . **tak perlu pun tutup *terminal* tu**
 
-5. lepas dah siap dengan apa yang kau dah ubah sama ada penambahan atau penolakan atau penukaran . kau just buka balik **terminal** tadi . dan run 
+5. lepas dah siap dengan apa yang kau dah ubah sama ada penambahan atau pengurangan atau perubahan . kau just buka balik **terminal** tadi . dan run 
 
     ```git pull``` 
 
-    untuk check kalau-kalau ada orang dah commit something . atau kau boleh terus dengan
+    untuk check kalau-kalau ada orang dah commit something
 
+6. Buat branch untuk task yg perlu korang buat.
+
+    ```git checkout -b NamaBranchYangSesuai```
+
+7. Coding yang perlu
+
+8. Add file
     ```git add -A```
 
-    tapi aku galakkan untuk git pull dulu . -A maksudnya semua. aku suggest untuk commit for each change request so command kau is as simple as this
+    -A stands for all
 
-6. lepastu 
+9. Commit file with message. -m stands for message
 
-    ```git commit -m "apa-apa pesanan atau remarks supaya orang tahu apa kau buat, atau pendek kata nama change request tersebut"```
+    ```git commit -m "nota untuk commit tersebut berkaitan apa"```
 
-7. last step just run. ni yang direct push to master, bukan branch. ti tengok miss nak minta buat branch ke master terus. but anything, your work can be tracked here on github.
+10. Push the branch
+    ```git push origin NamaBranchTadi```
 
-    ```git push```
-
-8. check dekat [sini](https://github.com/Azyhan96/RamlyRestaurant) untuk tengok hasil commit tadi . 
-
-9. test branch . for branch 
+11. Then buka github.com , submit pull request based on branch korang.
