@@ -33,7 +33,7 @@ _Coming Soon_
 
 7. Coding yang perlu
 
-8. Add file
+8. Add file berkaitan coding tadi, so better buat satu per satu. slow a bit
     ```git add -A```
 
     -A stands for all
@@ -45,4 +45,10 @@ _Coming Soon_
 10. Push the branch
     ```git push origin NamaBranchTadi```
 
-11. Then buka github.com , submit pull request based on branch korang.
+11. Then buka github.com , submit pull request based on branch korang. Pastu merge and delete branch
+
+## 12. Lepas dah settle step sampai 11. jangan lupa untuk run 
+
+    ```git checkout master && git pull upstream master && git branch -d NamaBranchTadi```
+
+13 . Bila dah return to Master dan branch pun sudah merged. buat lah ```Git Pull```
