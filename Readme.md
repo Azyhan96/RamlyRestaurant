@@ -49,6 +49,6 @@ _Coming Soon_
 
 ## 12. Lepas dah settle step sampai 11. jangan lupa untuk run 
 
-    ```git checkout master && git pull upstream master && git branch -d NamaBranchTadi```
+    ```git checkout master && git pull upstream master```
 
 13 . Bila dah return to Master dan branch pun sudah merged. buat lah ```Git Pull```
