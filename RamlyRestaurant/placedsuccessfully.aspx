@@ -42,6 +42,7 @@
     </style>
 </head>
 <body>
+    <meta http-equiv="refresh" content="6; url=CustomerHomepage.aspx"/>
     <form id="form1" runat="server">
         <div align="center">
             Order ID:
@@ -62,7 +63,6 @@
                             <asp:Label ID="Label4" runat="server"></asp:Label>
                         </td>
                     </tr>
-
                     <tr>
                         <td>
                             <table class="auto-style2">
@@ -96,10 +96,10 @@
                                     <asp:BoundField DataField="quantity" HeaderText="Quantity">
                                         <ItemStyle HorizontalAlign="Center" />
                                     </asp:BoundField>
-                                    <asp:BoundField DataField="prod_price" HeaderText="Price">
+                                    <asp:BoundField DataField="prod_price" HeaderText="Price" DataFormatString="RM {0:n2}">
                                         <ItemStyle HorizontalAlign="Center" />
                                     </asp:BoundField>
-                                    <asp:BoundField DataField="totalprice" HeaderText="Total Price">
+                                    <asp:BoundField DataField="totalprice" HeaderText="Total Price" DataFormatString="RM {0:n2}">
                                         <ItemStyle HorizontalAlign="Center" />
                                     </asp:BoundField>
                                 </Columns>

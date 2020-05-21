@@ -22,6 +22,7 @@ namespace RamlyRestaurant
             findorderdate(Label3.Text);
             findaddress(Label3.Text);
             showgrid(Label3.Text);
+            Session["BuyItems"] = null;
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -60,11 +61,8 @@ namespace RamlyRestaurant
             da.Fill(ds);
             if (ds.Tables[0].Rows.Count > 0)
             {
-
                 Label4.Text = ds.Tables[0].Rows[0]["dateoforder"].ToString();
-
             }
-
             con.Close();
         }
         private void findaddress(String Orderid)
@@ -81,11 +79,8 @@ namespace RamlyRestaurant
             da.Fill(ds);
             if (ds.Tables[0].Rows.Count > 0)
             {
-
                 Label5.Text = ds.Tables[0].Rows[0]["address"].ToString();
-
             }
-
             con.Close();
         }
         private void showgrid(String orderid)
@@ -131,7 +126,7 @@ namespace RamlyRestaurant
             GridView1.DataSource = dt;
             GridView1.DataBind();
 
-            Label7.Text = grandtotal.ToString();
+            Label7.Text = " RM " + grandtotal.ToString();
         }
         public override void VerifyRenderingInServerForm(Control control)
         {
