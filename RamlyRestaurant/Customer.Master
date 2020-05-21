@@ -11,6 +11,12 @@
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style1 {
+            width: 89px;
+            height: 50px;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -22,10 +28,12 @@
                     </td>
                     <td align="center">
                         <div>
-                            <img alt="" src="images/logo.png" />
-                            <asp:HyperLink ID="HyperLink1" runat="server" Width="43px" NavigateUrl="~/CustomerHomepage.aspx" Height="23px">Home</asp:HyperLink>
-                            <asp:HyperLink ID="HyperLink2" runat="server" Width="66px" NavigateUrl="~/CustomerMenu.aspx">Menu</asp:HyperLink>
-                            <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/AddToCart.aspx">Cart</asp:HyperLink>
+                            <img alt="" src="images/logo.png" class="auto-style1" />
+                            <asp:HyperLink ID="HyperLink1" runat="server" Width="59px" NavigateUrl="~/CustomerHomepage.aspx">Home</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink2" runat="server" Width="44px" NavigateUrl="~/CustomerMenu.aspx">Menu</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/AddToCart.aspx" Width="40px">Cart</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/UpdateDetails.aspx" Width="110px">Update Details</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/ViewOrderCustomerPage.aspx">Orders</asp:HyperLink>
                             <br />
                             <br />
                             <uc1:LoginStatus ID="LoginStatus1" runat="server" />
