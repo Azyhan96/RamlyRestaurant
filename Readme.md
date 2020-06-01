@@ -5,7 +5,7 @@ Mini Project for Software Configuration Management.
 
 ## Screenshot of the project
 
-_Coming Soon_
+test
 
 ## Kalau guna Command Line lagi senang nak guna Github
 
