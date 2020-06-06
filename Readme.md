@@ -5,7 +5,7 @@ Mini Project for Software Configuration Management.
 
 ## Screenshot of the project
 
-test
+coming soon guys. but do we ever need this on the github repo ?
 
 ## Kalau guna Command Line lagi senang nak guna Github
 
